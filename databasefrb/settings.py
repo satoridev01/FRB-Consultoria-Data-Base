@@ -53,8 +53,8 @@ THIRD_PARTY_APPS = [
 ]
 
 MY_APPS = [
-    "companys",
-    "employees",
+    "clients",
+    "users",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
@@ -67,7 +67,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "databasefrb.urls"
@@ -88,11 +88,18 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "databasefrb.wsgi.application"
+# WSGI_APPLICATION = "databasefrb.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
 DATABASES = {
     "default": {
@@ -106,6 +113,7 @@ DATABASES = {
     
 }
 DATABASE_URL = os.getenv("DATABASE_URL")
+
 if DATABASE_URL:
     db_from_env = dj_database_url.config(
         default=DATABASE_URL, conn_max_age=500, ssl_require=True
