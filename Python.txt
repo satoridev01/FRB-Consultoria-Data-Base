@@ -1,0 +1,110 @@
+Instalar o PIP=
+pip install pycodestyle
+Desinstalar o PIP =
+pip uninstall -y nome-do-pacote
+Ver versão do PIP =
+pip list
+----------------------------------------
+Instalar o pycodestyle =
+pip install pycodestyle
+---------------------------------------
+instalar o black formatador de código=
+
+pip install black
+
+----------------------------------------
+para instalar as importações por projeto =
+pip freeze
+
+iniciação completa=
+python -m venv venv --upgrade-deps && source venv/Scripts/activate
+
+python -m venv venv 
+
+source venv/Scripts/activate
+
+pip freeze > requirements.txt
+escolher quais extesões usar
+
+pip install -r requirements.txt
+
+pip install pytest
+
+pip install pytest-testdox
+
+pip install pytest-django
+----------------------------------------
+django
+
+pip install django
+
+pip install djangorestframework ipython black ipdb
+
+para autenticação de usuário =
+
+pip install djangorestframework-simplejwt
+
+iniciar aplicação em django=
+
+django-admin startproject nomedapastadjango .
+
+iniciar um app=
+
+python manage.py startapp nomedoapp
+
+para dar run no django e rodar migrações=
+
+python manage.py runserver
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+para definir um aplicativo no django=
+
+entre na pasta settings e coloque na lista INSTALLED_APPS ,"nomedoappcriado"
+
+para desativar o projeto django=
+deactivate
+
+para apagar todas as migrations =
+
+rm */migrations/0*
+
+ipdb para debugar o código = 
+
+ import ipdb
+ ipdb.set_trace()
+
+para o env=
+
+pip install python-dotenv
+
+para o banco de dados=
+
+pip install psycopg2-binary
+
+para instalar o DRF Spectacular =
+
+pip install drf-spectacular
+
+Adicionar em settings 
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "drf_spectacular",
+] 
+e adicionar também 
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 2,
+    "DEFAULT_SCHEMA_CLASS":"drf_spectacular.openapi.AutoSchema"
+}
+
+python manage.py spectacular --file schema.yaml
+
+python manage.py spectacular --file schema.yaml --validate
+
+Deploy da aplicação =
+pip install 'whitenoise[brotli]' gunicorn
+
+pip install dj-database-url psycopg2-binary python-dotenv
