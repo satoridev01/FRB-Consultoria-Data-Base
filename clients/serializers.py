@@ -20,5 +20,6 @@ class ClientSerializer(serializers.ModelSerializer):
             "contract_life",
             "created_at",
             "updated_at",
+            "active",
             "users",
         ]

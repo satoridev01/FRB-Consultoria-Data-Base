@@ -5,8 +5,7 @@ import ipdb
 
 class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data: dict) -> User:
-        
-        if not validated_data["user_level"] == "medic":
+        if not validated_data["user_level"] == "admin":
             return User.objects.create_user(**validated_data)
         
         return User.objects.create_superuser(**validated_data)
@@ -25,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = [
             "id",
+            "name",
             "username",
             "email",
             "password",
@@ -33,7 +33,8 @@ class UserSerializer(serializers.ModelSerializer):
             "description",
             "created_at",
             "updated_at",
-            "client_id"
+            "client_id",
+            "active",
         ]
 
         extra_kwargs = {

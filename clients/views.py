@@ -5,18 +5,17 @@ from .serializers import ClientSerializer
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
-
 class ClientsView(generics.ListCreateAPIView):
-    # authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated, IsAdminUser]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAdminUser]
     
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
 
 
 class ClientsDetailView(generics.RetrieveUpdateDestroyAPIView):
-    # authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated, IsAdminUser]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
