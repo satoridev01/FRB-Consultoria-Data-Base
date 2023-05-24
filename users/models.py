@@ -4,6 +4,7 @@ import uuid
 
 class User(AbstractUser):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+    name = models.CharField(max_length=150)
     username = models.CharField(unique=True, max_length=150)
     email = models.EmailField(unique=True, max_length=150)
     password = models.CharField(max_length=150)
@@ -11,6 +12,7 @@ class User(AbstractUser):
     user_level = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
 
     client = models.ForeignKey(
         "clients.Client",
