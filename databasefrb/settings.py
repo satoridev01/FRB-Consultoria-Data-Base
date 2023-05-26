@@ -38,41 +38,32 @@ RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS += [RENDER_EXTERNAL_HOSTNAME, "0.0.0.0"]
 # Application definition
-DJANGO_APPS = [
+INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
+    "whitenoise.runserver_nostatic",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "whitenoise.runserver_nostatic",
     "corsheaders",
-]
-
-THIRD_PARTY_APPS = [
+    "clients",
+    "users",
     "rest_framework",
     "drf_spectacular",
 ]
 
-MY_APPS = [
-    "clients",
-    "users",
-]
-
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    
 ]
 
 ROOT_URLCONF = "databasefrb.urls"
@@ -93,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = "databasefrb.wsgi.application"
+WSGI_APPLICATION = "databasefrb.wsgi.application"
 
 
 # Database
@@ -190,18 +181,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173",
+# ]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-AWS_ACCESS_KEY_ID = 'AKIA5BZCL2EVZNY4M47P'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'frbbucket2'
-AWS_S3_SIGNATURE_NAME = 's3v4',
-AWS_S3_REGION_NAME = 'us-east-2'
+AWS_ACCESS_KEY_ID = "AKIA5BZCL2EVZNY4M47P"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_STORAGE_BUCKET_NAME = "frbbucket2"
+AWS_S3_SIGNATURE_NAME = ("s3v4",)
+AWS_S3_REGION_NAME = "us-east-2"
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_VERITY = True
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = "storages.databasefrb.s3boto3.S3Boto3Storage"
