@@ -8,6 +8,7 @@ colorama==0.4.6
 decorator==5.1.1
 dj-database-url==2.0.0
 Django==4.2.1
+django-cors-headers==4.0.0
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 drf-spectacular==0.26.2
@@ -19,6 +20,7 @@ jedi==0.18.2
 jsonschema==4.17.3
 matplotlib-inline==0.1.6
 mypy-extensions==1.0.0
+mysqlclient==2.1.1
 packaging==23.1
 parso==0.8.3
 pathspec==0.11.1
