@@ -45,7 +45,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "corsheaders"
+    "corsheaders",
 ]
 
 THIRD_PARTY_APPS = [
@@ -104,16 +104,16 @@ TEMPLATES = [
 #     }
 # }
 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "USER":os.getenv("POSTGRES_USERNAME"),
-        "PASSWORD":os.getenv("POSTGRES_PASSWORD"),
-        "NAME":os.getenv("POSTGRES_DB_NAME"),
-        "HOST":os.getenv("POSTGRES_DB_HOST"),
-        "PORT":os.getenv("POSTGRES_DB_PORT"),
+        "USER": os.getenv("POSTGRES_USERNAME"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "NAME": os.getenv("POSTGRES_DB_NAME"),
+        "HOST": os.getenv("POSTGRES_DB_HOST"),
+        "PORT": os.getenv("POSTGRES_DB_PORT"),
     }
-    
 }
 DATABASE_URL = os.getenv("DATABASE_URL")
 
@@ -127,9 +127,7 @@ if DATABASE_URL:
 
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-    STATICFILES_STORAGE = (
-        "whitenoise.storage.CompressedManifestStaticFilesStorage"
-    )
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -157,13 +155,13 @@ SIMPLE_JWT = {
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
-    "DEFAULT_SCHEMA_CLASS":"drf_spectacular.openapi.AutoSchema"
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Banco de Dados FRB Consultoria",
     "DESCRIPTION": "Projeto Banco de dados",
-    "VERSION" : "0.0.1",
+    "VERSION": "0.0.1",
 }
 
 # Internationalization
@@ -191,7 +189,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
+    "http://localhost:5173",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
