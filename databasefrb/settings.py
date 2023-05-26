@@ -45,6 +45,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders"
 ]
 
 THIRD_PARTY_APPS = [
@@ -67,6 +68,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     # "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
@@ -153,7 +156,7 @@ SIMPLE_JWT = {
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 2,
+    "PAGE_SIZE": 10,
     "DEFAULT_SCHEMA_CLASS":"drf_spectacular.openapi.AutoSchema"
 }
 
@@ -186,3 +189,9 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True

@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import User
 from rest_framework.validators import UniqueValidator
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 import ipdb
 
 class UserSerializer(serializers.ModelSerializer):
@@ -29,6 +31,7 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "password",
             "user_level",
+            "power_bi_link",
             "is_superuser",
             "description",
             "created_at",
@@ -57,3 +60,11 @@ class UserSerializer(serializers.ModelSerializer):
                 ]
             },
         }
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token["user_level"] = user.user_level
+        token["power_bi_link"] = user.power_bi_link
+        return token
