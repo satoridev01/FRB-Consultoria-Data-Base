@@ -10,6 +10,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=150)
     description = models.TextField(null=True)
     user_level = models.CharField(max_length=20)
+    power_bi_link = models.CharField(max_length=150)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
