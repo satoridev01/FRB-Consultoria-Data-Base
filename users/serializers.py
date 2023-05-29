@@ -67,4 +67,5 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
         token["user_level"] = user.user_level
         token["power_bi_link"] = user.power_bi_link
+        token["name"] = user.name
         return token
