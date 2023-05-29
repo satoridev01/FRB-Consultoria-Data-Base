@@ -31,12 +31,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
-RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
 
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS += [RENDER_EXTERNAL_HOSTNAME, "0.0.0.0"]
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -90,13 +87,17 @@ WSGI_APPLICATION = "databasefrb.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
+# RENDER_EXTERNAL_HOSTNAME = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+
+# if RENDER_EXTERNAL_HOSTNAME:
+#     ALLOWED_HOSTS += [RENDER_EXTERNAL_HOSTNAME, "0.0.0.0"]
 
 DATABASES = {
     "default": {
@@ -108,19 +109,22 @@ DATABASES = {
         "PORT": os.getenv("POSTGRES_DB_PORT"),
     }
 }
-DATABASE_URL = os.getenv("DATABASE_URL")
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
-if DATABASE_URL:
-    db_from_env = dj_database_url.config(
-        default=DATABASE_URL, conn_max_age=500, ssl_require=True
-    )
-    DATABASES["default"].update(db_from_env)
+# DATABASE_URL = os.getenv("DATABASE_URL")
 
-    DEBUG = False
+# if DATABASE_URL:
+#     db_from_env = dj_database_url.config(
+#         default=DATABASE_URL, conn_max_age=500, ssl_require=True
+#     )
+#     DATABASES["default"].update(db_from_env)
 
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+#     DEBUG = False
+
+# if not DEBUG:
+#     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+#     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
