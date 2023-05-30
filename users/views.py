@@ -13,7 +13,7 @@ class UsersView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminOrReadOnly]
 
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by('name')
     serializer_class = UserSerializer
 
     def perform_create(self, serializer):

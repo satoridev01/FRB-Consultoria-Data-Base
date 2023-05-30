@@ -9,7 +9,7 @@ class ClientsView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminUser]
     
-    queryset = Client.objects.all()
+    queryset = Client.objects.all().order_by('client_name')
     serializer_class = ClientSerializer
 
 
