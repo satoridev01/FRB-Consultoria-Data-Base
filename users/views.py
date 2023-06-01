@@ -13,8 +13,6 @@ from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 import ipdb
 
 
-
-
 class UsersView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAdminOrReadOnly]
@@ -35,6 +33,14 @@ class UsersDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
 
     lookup_url_kwarg = "user_id"
+
+class SendMailView(generics.CreateAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminOrUser]
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     

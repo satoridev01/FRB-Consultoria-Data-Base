@@ -2,15 +2,26 @@ from rest_framework import serializers
 from .models import User
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
+from django.core.mail import EmailMessage
 import ipdb
 
 class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data: dict) -> User:
-        if not validated_data["user_level"] == "admin":
-            return User.objects.create_user(**validated_data)
-        
-        return User.objects.create_superuser(**validated_data)
+        if validated_data["user_level"] == "admin":
+            return User.objects.create_superuser(**validated_data)
+
+        created = User.objects.create_user(**validated_data)
+
+        email = EmailMessage(
+            subject="Bem vindo a frb consultoria",
+            body = f"Olá {created.name}.\n\nObrigado por fazer parte da FRB consultoria!\n\nSua conta foi gerada automaticamente em nosso site. Para acessá-la e definir uma senha, clique no link abaixo:\n\nhttps://frbconsultoria.com.br/redefinirsenha/{created.id}",
+            from_email=f"FRB consultoria {'<contato@frbconsultoria.com.br>'}",
+            to=[f"{created.email}"],
+            headers={"Importance": "High"},
+        )
+
+        email.send()
+        return created
 
     def update(self, instance: User, validated_data: dict) -> User:
         for key, value in validated_data.items():
@@ -60,6 +71,7 @@ class UserSerializer(serializers.ModelSerializer):
                 ]
             },
         }
+
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
