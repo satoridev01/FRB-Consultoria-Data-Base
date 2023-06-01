@@ -3,7 +3,7 @@ from .models import User
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.core.mail import EmailMessage
-import ipdb
+
 
 class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data: dict) -> User:

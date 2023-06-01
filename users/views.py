@@ -34,14 +34,6 @@ class UsersDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     lookup_url_kwarg = "user_id"
 
-class SendMailView(generics.CreateAPIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated, IsAdminOrUser]
-
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-
 class CustomTokenObtainPairView(TokenObtainPairView):
     
     def post(self, request, *args, **kwargs):
